@@ -16,7 +16,7 @@
 
 形式:
 
-- <type>: <summary>
+- type: summary
 
 例:
 
