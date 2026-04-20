@@ -2,6 +2,21 @@
 
 - PoC仕様: [PoC_Spec.md](PoC_Spec.md)
 
+## フロントエンド実装（web）
+
+- フロント実装は `web/` 配下に作成
+- 技術: Vue + TypeScript + Vite + Tailwind CSS + SVG
+
+起動手順:
+
+1. `cd web`
+2. `npm install`
+3. `npm run dev`
+
+ビルド確認:
+
+- `npm run build`
+
 ## Commit Message Rule
 
 コミットメッセージは先頭に種別プレフィックスを付ける。
