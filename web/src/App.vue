@@ -2,9 +2,11 @@
 import { reactive } from 'vue'
 
 type RatioMode = 'golden' | 'silver' | 'square'
+type EngineType = 'radial' | 'grid' | 'concentric'
 
 const params = reactive({
   ratioMode: 'silver' as RatioMode,
+  engineType: 'radial' as EngineType,
   divisions: 12,
   iterations: 5,
   angleStep: 15,
@@ -17,6 +19,12 @@ const ratioLabel: Record<RatioMode, string> = {
   golden: '黄金比 (1:1.618)',
   silver: '白銀比 (1:1.414)',
   square: '正方形 (1:1)',
+}
+
+const engineLabel: Record<EngineType, string> = {
+  radial: '放射型（菊系）',
+  grid: '格子交差型（七宝・麻の葉寄り）',
+  concentric: '同心反復型（輪重ね）',
 }
 </script>
 
@@ -34,7 +42,10 @@ const ratioLabel: Record<RatioMode, string> = {
         <section class="rounded-2xl border border-stone-300 bg-white p-4 md:p-6">
           <div class="mb-3 flex items-center justify-between">
             <h2 class="text-base font-semibold md:text-lg">Preview</h2>
-            <span class="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700">{{ ratioLabel[params.ratioMode] }}</span>
+            <div class="flex flex-wrap items-center justify-end gap-2">
+              <span class="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700">{{ ratioLabel[params.ratioMode] }}</span>
+              <span class="rounded-full bg-stone-200 px-3 py-1 text-xs text-stone-700">{{ engineLabel[params.engineType] }}</span>
+            </div>
           </div>
 
           <div class="flex h-[62vh] min-h-[420px] items-center justify-center rounded-xl border border-dashed border-stone-400 bg-stone-50">
@@ -50,6 +61,22 @@ const ratioLabel: Record<RatioMode, string> = {
           <h2 class="mb-4 text-base font-semibold md:text-lg">Control Panel</h2>
 
           <div class="space-y-4">
+            <div>
+              <label class="mb-2 block text-sm font-medium">生成エンジンの型</label>
+              <div class="grid grid-cols-1 gap-2">
+                <button
+                  v-for="engine in ['radial', 'grid', 'concentric']"
+                  :key="engine"
+                  type="button"
+                  class="rounded-lg border px-3 py-2 text-left text-xs transition md:text-sm"
+                  :class="params.engineType === engine ? 'border-stone-900 bg-stone-900 text-white' : 'border-stone-300 bg-stone-100 hover:bg-stone-200'"
+                  @click="params.engineType = engine as EngineType"
+                >
+                  {{ engineLabel[engine as EngineType] }}
+                </button>
+              </div>
+            </div>
+
             <div>
               <label class="mb-2 block text-sm font-medium">比率モード</label>
               <div class="grid grid-cols-3 gap-2">
