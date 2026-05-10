@@ -42,6 +42,7 @@ export type EmblemPreviewData = {
   rings: PreviewCircle[]
   spokes: PreviewLine[]
   dots: PreviewDot[]
+  petals: PreviewCircle[]
 }
 
 export type MonPreviewData = {

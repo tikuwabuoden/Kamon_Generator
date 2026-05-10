@@ -66,6 +66,17 @@ defineProps<Props>()
             :class="dot.index % 2 === 0 ? 'opacity-85' : 'opacity-60'"
           />
           <circle
+            v-for="petal in preview.emblemPreview.petals"
+            :key="petal.id"
+            :cx="petal.cx"
+            :cy="petal.cy"
+            :r="petal.r"
+            :fill="params.fillMode === 'filled' && petal.index % 2 === 0 ? 'currentColor' : 'none'"
+            stroke="currentColor"
+            :stroke-width="Math.max(1, params.strokeWidth * 0.65)"
+            :class="petal.index % 2 === 0 ? 'opacity-55' : 'opacity-35'"
+          />
+          <circle
             cx="200"
             cy="200"
             :r="18 + params.strokeWidth * 1.5"
