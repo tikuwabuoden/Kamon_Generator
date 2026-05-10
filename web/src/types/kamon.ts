@@ -28,6 +28,7 @@ export type PreviewDot = {
 
 export type KamonParams = {
   ratioMode: RatioMode
+  compareMode: boolean
   templateType: TemplateType
   divisions: number
   iterations: number
@@ -45,4 +46,9 @@ export type EmblemPreviewData = {
 
 export type MonPreviewData = {
   circles: PreviewCircle[]
+}
+
+export type PreviewBundle = {
+  emblemPreview: EmblemPreviewData
+  monPreview: MonPreviewData
 }

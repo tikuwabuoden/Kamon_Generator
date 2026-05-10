@@ -8,7 +8,7 @@ import ControlPanel from './components/ControlPanel.vue'
 
 const params = reactive<KamonParams>(initialParams)
 
-const { emblemPreview, monPreview } = useKamonPreview(params)
+const { currentPreview, goldenPreview, silverPreview } = useKamonPreview(params)
 
 const updateParam = <K extends keyof KamonParams>(key: K, value: KamonParams[K]) => {
   params[key] = value
@@ -28,13 +28,15 @@ const updateParam = <K extends keyof KamonParams>(key: K, value: KamonParams[K])
       <main class="grid flex-1 gap-4 md:grid-cols-[1.5fr_1fr]">
         <PreviewPanel
           :params="params"
-          :emblem-preview="emblemPreview"
-          :mon-preview="monPreview"
+          :current-preview="currentPreview"
+          :golden-preview="goldenPreview"
+          :silver-preview="silverPreview"
         />
 
         <ControlPanel
           :params="params"
           @update:ratio-mode="(v) => updateParam('ratioMode', v)"
+          @update:compare-mode="(v) => updateParam('compareMode', v)"
           @update:template-type="(v) => updateParam('templateType', v)"
           @update:divisions="(v) => updateParam('divisions', v)"
           @update:iterations="(v) => updateParam('iterations', v)"

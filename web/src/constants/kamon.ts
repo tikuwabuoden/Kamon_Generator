@@ -23,6 +23,7 @@ export const templateLabel: Record<TemplateType, string> = {
 
 export const initialParams = {
   ratioMode: 'silver' as RatioMode,
+  compareMode: false,
   templateType: 'mon' as TemplateType,
   divisions: 12,
   iterations: 5,

@@ -6,10 +6,11 @@ interface Props {
   params: KamonParams
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
   'update:ratioMode': [value: RatioMode]
+  'update:compareMode': [value: boolean]
   'update:templateType': [value: TemplateType]
   'update:divisions': [value: number]
   'update:iterations': [value: number]
@@ -21,6 +22,10 @@ const emit = defineEmits<{
 
 const handleRatioModeChange = (mode: RatioMode) => {
   emit('update:ratioMode', mode)
+}
+
+const handleCompareModeToggle = () => {
+  emit('update:compareMode', !props.params.compareMode)
 }
 
 const handleTemplateTypeChange = (template: TemplateType) => {
@@ -62,6 +67,19 @@ const handleFillModeChange = (mode: 'outline' | 'filled') => {
     <h2 class="mb-4 text-base font-semibold md:text-lg">Control Panel</h2>
 
     <div class="space-y-4">
+      <div>
+        <label class="mb-2 block text-sm font-medium">表示モード</label>
+        <button
+          type="button"
+          class="flex w-full items-center justify-between rounded-lg border px-3 py-3 text-left text-sm transition"
+          :class="params.compareMode ? 'border-stone-900 bg-stone-900 text-white' : 'border-stone-300 bg-stone-100 hover:bg-stone-200'"
+          @click="handleCompareModeToggle"
+        >
+          <span>{{ params.compareMode ? '比較ビュー ON' : '単一ビュー' }}</span>
+          <span class="text-xs opacity-80">{{ params.compareMode ? '黄金比 / 白銀比' : '現在の比率モード' }}</span>
+        </button>
+      </div>
+
       <div>
         <label class="mb-2 block text-sm font-medium">テンプレート</label>
         <div class="grid grid-cols-2 gap-2">
