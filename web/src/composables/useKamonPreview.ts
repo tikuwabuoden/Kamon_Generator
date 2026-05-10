@@ -3,6 +3,7 @@ import type {
   KamonParams,
   EmblemPreviewData,
   MonPreviewData,
+  ShippoPreviewData,
   PreviewBundle,
   PreviewDot,
   PreviewCircle,
@@ -161,10 +162,49 @@ const buildMonPreview = (params: KamonParams): MonPreviewData => {
   return { circles, accents }
 }
 
+const buildShippoPreview = (params: KamonParams): ShippoPreviewData => {
+  const circles: PreviewCircle[] = []
+  const ringCount = Math.max(3, Math.floor(params.iterations) + 1)
+  const gridSize = Math.max(2, Math.min(4, Math.floor(params.divisions / 6) + 1))
+  const cellSize = (SVG_RADIUS * 2) / gridSize
+  const radius = cellSize / 2
+  const start = SVG_CENTER - (cellSize * gridSize) / 2 + radius
+
+  for (let row = 0; row <= gridSize; row += 1) {
+    for (let col = 0; col <= gridSize; col += 1) {
+      const cx = start + col * cellSize
+      const cy = start + row * cellSize
+
+      circles.push({
+        id: `shippo-base-${row}-${col}`,
+        index: row + col,
+        cx,
+        cy,
+        r: radius,
+      })
+
+      const insetStep = radius / (ringCount + 1)
+
+      for (let inset = 1; inset < ringCount; inset += 1) {
+        circles.push({
+          id: `shippo-inset-${row}-${col}-${inset}`,
+          index: row + col + inset,
+          cx,
+          cy,
+          r: Math.max(8, radius - insetStep * inset),
+        })
+      }
+    }
+  }
+
+  return { circles }
+}
+
 const buildPreviewBundle = (params: KamonParams): PreviewBundle => {
   return {
     emblemPreview: buildEmblemPreview(params),
     monPreview: buildMonPreview(params),
+    shippoPreview: buildShippoPreview(params),
   }
 }
 

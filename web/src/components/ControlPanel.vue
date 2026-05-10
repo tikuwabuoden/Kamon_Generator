@@ -82,9 +82,9 @@ const handleFillModeChange = (mode: 'outline' | 'filled') => {
 
       <div>
         <label class="mb-2 block text-sm font-medium">テンプレート</label>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-3 gap-2">
           <button
-            v-for="template in ['emblem', 'mon']"
+            v-for="template in ['emblem', 'mon', 'shippo']"
             :key="template"
             type="button"
             class="rounded-lg border px-3 py-2 text-left text-xs transition md:text-sm"

@@ -1,5 +1,5 @@
 export type RatioMode = 'golden' | 'silver' | 'square'
-export type TemplateType = 'emblem' | 'mon'
+export type TemplateType = 'emblem' | 'mon' | 'shippo'
 
 export type PreviewLine = {
   id: string
@@ -50,7 +50,12 @@ export type MonPreviewData = {
   accents: PreviewCircle[]
 }
 
+export type ShippoPreviewData = {
+  circles: PreviewCircle[]
+}
+
 export type PreviewBundle = {
   emblemPreview: EmblemPreviewData
   monPreview: MonPreviewData
+  shippoPreview: ShippoPreviewData
 }

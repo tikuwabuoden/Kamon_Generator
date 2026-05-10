@@ -87,7 +87,7 @@ defineProps<Props>()
           />
         </g>
 
-        <g v-else>
+        <g v-else-if="params.templateType === 'mon'">
           <circle
             v-for="circle in preview.monPreview.circles"
             :key="circle.id"
@@ -109,6 +109,29 @@ defineProps<Props>()
             stroke="currentColor"
             :stroke-width="Math.max(1, params.strokeWidth * 0.7)"
             :class="accent.index % 2 === 0 ? 'opacity-85' : 'opacity-55'"
+          />
+        </g>
+
+        <g v-else :transform="`rotate(${params.angleStep} ${SVG_CENTER} ${SVG_CENTER})`">
+          <circle
+            cx="200"
+            cy="200"
+            :r="SVG_RADIUS"
+            fill="none"
+            stroke="currentColor"
+            :stroke-width="Math.max(2, params.strokeWidth)"
+            class="opacity-35"
+          />
+          <circle
+            v-for="circle in preview.shippoPreview.circles"
+            :key="circle.id"
+            :cx="circle.cx"
+            :cy="circle.cy"
+            :r="circle.r"
+            :fill="params.fillMode === 'filled' && circle.index % 3 === 0 ? 'currentColor' : 'none'"
+            stroke="currentColor"
+            :stroke-width="Math.max(1, params.strokeWidth * 0.85)"
+            :class="circle.index % 2 === 0 ? 'opacity-55' : 'opacity-35'"
           />
         </g>
       </svg>

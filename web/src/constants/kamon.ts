@@ -19,6 +19,7 @@ export const ratioLabel: Record<RatioMode, string> = {
 export const templateLabel: Record<TemplateType, string> = {
   emblem: 'Emblem',
   mon: 'Mon',
+  shippo: '七宝',
 }
 
 export const initialParams = {
