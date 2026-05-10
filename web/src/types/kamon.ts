@@ -46,6 +46,7 @@ export type EmblemPreviewData = {
 
 export type MonPreviewData = {
   circles: PreviewCircle[]
+  accents: PreviewCircle[]
 }
 
 export type PreviewBundle = {

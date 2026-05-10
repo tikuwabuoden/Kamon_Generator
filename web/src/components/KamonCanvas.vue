@@ -88,6 +88,17 @@ defineProps<Props>()
             :stroke-width="params.strokeWidth"
             :class="circle.index % 2 === 0 ? 'opacity-80' : 'opacity-60'"
           />
+          <circle
+            v-for="accent in preview.monPreview.accents"
+            :key="accent.id"
+            :cx="accent.cx"
+            :cy="accent.cy"
+            :r="accent.r"
+            :fill="params.fillMode === 'filled' ? 'currentColor' : 'none'"
+            stroke="currentColor"
+            :stroke-width="Math.max(1, params.strokeWidth * 0.7)"
+            :class="accent.index % 2 === 0 ? 'opacity-85' : 'opacity-55'"
+          />
         </g>
       </svg>
     </div>

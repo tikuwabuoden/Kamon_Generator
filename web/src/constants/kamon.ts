@@ -4,10 +4,10 @@ export const SVG_SIZE = 400
 export const SVG_CENTER = SVG_SIZE / 2
 export const SVG_RADIUS = 140
 
-export const ratioScale: Record<RatioMode, number> = {
-  golden: 0.8,
-  silver: 0.86,
-  square: 0.92,
+export const ratioValue: Record<RatioMode, number> = {
+  golden: 1.618,
+  silver: 1.414,
+  square: 1,
 }
 
 export const ratioLabel: Record<RatioMode, string> = {
