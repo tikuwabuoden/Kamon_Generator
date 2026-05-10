@@ -1,17 +1,15 @@
 import { computed } from 'vue'
 import type {
   KamonParams,
-  RadialPreviewData,
-  GridPreviewData,
-  ConcentricPreviewData,
-  PreviewLine,
+  EmblemPreviewData,
+  MonPreviewData,
   PreviewDot,
   PreviewCircle,
 } from '../types/kamon'
 import { SVG_CENTER, SVG_RADIUS, ratioScale } from '../constants/kamon'
 
 export function useKamonPreview(params: KamonParams) {
-  const radialPreview = computed((): RadialPreviewData => {
+  const emblemPreview = computed((): EmblemPreviewData => {
     const spokeCount = Math.max(3, params.divisions)
     const ringCount = Math.max(2, params.iterations)
     const baseRotation = (params.angleStep * Math.PI) / 180
@@ -54,57 +52,7 @@ export function useKamonPreview(params: KamonParams) {
     return { rings, spokes, dots }
   })
 
-  const gridPreview = computed((): GridPreviewData => {
-    const lineCount = Math.max(3, Math.floor(params.divisions / 2))
-    const rotation = `rotate(${params.angleStep} ${SVG_CENTER} ${SVG_CENTER})`
-    const spacing = (SVG_RADIUS * 2) / (lineCount + 1)
-    const start = SVG_CENTER - (lineCount * spacing) / 2
-
-    const lines: PreviewLine[] = []
-    const circles: PreviewCircle[] = []
-
-    for (let index = 0; index < lineCount; index += 1) {
-      const position = start + spacing * index
-
-      lines.push({
-        id: `v-${index}`,
-        index,
-        x1: position,
-        y1: SVG_CENTER - SVG_RADIUS,
-        x2: position,
-        y2: SVG_CENTER + SVG_RADIUS,
-      })
-
-      lines.push({
-        id: `h-${index}`,
-        index,
-        x1: SVG_CENTER - SVG_RADIUS,
-        y1: position,
-        x2: SVG_CENTER + SVG_RADIUS,
-        y2: position,
-      })
-
-      circles.push({
-        id: `c-h-${index}`,
-        index,
-        cx: position,
-        cy: SVG_CENTER,
-        r: spacing * 0.95,
-      })
-
-      circles.push({
-        id: `c-v-${index}`,
-        index,
-        cx: SVG_CENTER,
-        cy: position,
-        r: spacing * 0.95,
-      })
-    }
-
-    return { lines, circles, rotation }
-  })
-
-  const concentricPreview = computed((): ConcentricPreviewData => {
+  const monPreview = computed((): MonPreviewData => {
     const ringCount = Math.max(3, params.iterations + 1)
     const scale = ratioScale[params.ratioMode]
     const circles: PreviewCircle[] = []
@@ -123,8 +71,7 @@ export function useKamonPreview(params: KamonParams) {
   })
 
   return {
-    radialPreview,
-    gridPreview,
-    concentricPreview,
+    emblemPreview,
+    monPreview,
   }
 }

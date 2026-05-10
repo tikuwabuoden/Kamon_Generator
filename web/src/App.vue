@@ -8,7 +8,7 @@ import ControlPanel from './components/ControlPanel.vue'
 
 const params = reactive<KamonParams>(initialParams)
 
-const { radialPreview, gridPreview, concentricPreview } = useKamonPreview(params)
+const { emblemPreview, monPreview } = useKamonPreview(params)
 
 const updateParam = <K extends keyof KamonParams>(key: K, value: KamonParams[K]) => {
   params[key] = value
@@ -21,22 +21,21 @@ const updateParam = <K extends keyof KamonParams>(key: K, value: KamonParams[K])
       <header class="mb-4 rounded-2xl border border-stone-300 bg-white px-5 py-4">
         <h1 class="text-xl font-semibold tracking-wide md:text-2xl">Kamon Generator PoC</h1>
         <p class="mt-1 text-sm text-stone-600">
-          フェーズ1: Vue + TypeScript + Vite + Tailwind の土台と2ペインUI
+          比率による印象差を検証するための紋章ジェネレーターPoC
         </p>
       </header>
 
       <main class="grid flex-1 gap-4 md:grid-cols-[1.5fr_1fr]">
         <PreviewPanel
           :params="params"
-          :radial-preview="radialPreview"
-          :grid-preview="gridPreview"
-          :concentric-preview="concentricPreview"
+          :emblem-preview="emblemPreview"
+          :mon-preview="monPreview"
         />
 
         <ControlPanel
           :params="params"
           @update:ratio-mode="(v) => updateParam('ratioMode', v)"
-          @update:engine-type="(v) => updateParam('engineType', v)"
+          @update:template-type="(v) => updateParam('templateType', v)"
           @update:divisions="(v) => updateParam('divisions', v)"
           @update:iterations="(v) => updateParam('iterations', v)"
           @update:angle-step="(v) => updateParam('angleStep', v)"

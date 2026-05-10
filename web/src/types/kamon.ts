@@ -1,5 +1,5 @@
 export type RatioMode = 'golden' | 'silver' | 'square'
-export type EngineType = 'radial' | 'grid' | 'concentric'
+export type TemplateType = 'emblem' | 'mon'
 
 export type PreviewLine = {
   id: string
@@ -28,7 +28,7 @@ export type PreviewDot = {
 
 export type KamonParams = {
   ratioMode: RatioMode
-  engineType: EngineType
+  templateType: TemplateType
   divisions: number
   iterations: number
   angleStep: number
@@ -37,18 +37,12 @@ export type KamonParams = {
   fillMode: 'outline' | 'filled'
 }
 
-export type RadialPreviewData = {
+export type EmblemPreviewData = {
   rings: PreviewCircle[]
   spokes: PreviewLine[]
   dots: PreviewDot[]
 }
 
-export type GridPreviewData = {
-  lines: PreviewLine[]
-  circles: PreviewCircle[]
-  rotation: string
-}
-
-export type ConcentricPreviewData = {
+export type MonPreviewData = {
   circles: PreviewCircle[]
 }

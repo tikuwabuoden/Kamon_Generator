@@ -1,4 +1,4 @@
-import type { RatioMode, EngineType } from '../types/kamon'
+import type { RatioMode, TemplateType } from '../types/kamon'
 
 export const SVG_SIZE = 400
 export const SVG_CENTER = SVG_SIZE / 2
@@ -16,15 +16,14 @@ export const ratioLabel: Record<RatioMode, string> = {
   square: '正方形 (1:1)',
 }
 
-export const engineLabel: Record<EngineType, string> = {
-  radial: '放射型（菊系）',
-  grid: '格子交差型（七宝・麻の葉寄り）',
-  concentric: '同心反復型（輪重ね）',
+export const templateLabel: Record<TemplateType, string> = {
+  emblem: 'Emblem',
+  mon: 'Mon',
 }
 
 export const initialParams = {
   ratioMode: 'silver' as RatioMode,
-  engineType: 'radial' as EngineType,
+  templateType: 'mon' as TemplateType,
   divisions: 12,
   iterations: 5,
   angleStep: 15,

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { KamonParams, RatioMode, EngineType } from '../types/kamon'
-import { ratioLabel, engineLabel } from '../constants/kamon'
+import type { KamonParams, RatioMode, TemplateType } from '../types/kamon'
+import { ratioLabel, templateLabel } from '../constants/kamon'
 
 interface Props {
   params: KamonParams
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emit = defineEmits<{
   'update:ratioMode': [value: RatioMode]
-  'update:engineType': [value: EngineType]
+  'update:templateType': [value: TemplateType]
   'update:divisions': [value: number]
   'update:iterations': [value: number]
   'update:angleStep': [value: number]
@@ -23,8 +23,8 @@ const handleRatioModeChange = (mode: RatioMode) => {
   emit('update:ratioMode', mode)
 }
 
-const handleEngineTypeChange = (engine: EngineType) => {
-  emit('update:engineType', engine)
+const handleTemplateTypeChange = (template: TemplateType) => {
+  emit('update:templateType', template)
 }
 
 const handleDivisionsChange = (e: Event) => {
@@ -63,17 +63,17 @@ const handleFillModeChange = (mode: 'outline' | 'filled') => {
 
     <div class="space-y-4">
       <div>
-        <label class="mb-2 block text-sm font-medium">生成エンジンの型</label>
-        <div class="grid grid-cols-1 gap-2">
+        <label class="mb-2 block text-sm font-medium">テンプレート</label>
+        <div class="grid grid-cols-2 gap-2">
           <button
-            v-for="engine in ['radial', 'grid', 'concentric']"
-            :key="engine"
+            v-for="template in ['emblem', 'mon']"
+            :key="template"
             type="button"
             class="rounded-lg border px-3 py-2 text-left text-xs transition md:text-sm"
-            :class="params.engineType === engine ? 'border-stone-900 bg-stone-900 text-white' : 'border-stone-300 bg-stone-100 hover:bg-stone-200'"
-            @click="handleEngineTypeChange(engine as EngineType)"
+            :class="params.templateType === template ? 'border-stone-900 bg-stone-900 text-white' : 'border-stone-300 bg-stone-100 hover:bg-stone-200'"
+            @click="handleTemplateTypeChange(template as TemplateType)"
           >
-            {{ engineLabel[engine as EngineType] }}
+            {{ templateLabel[template as TemplateType] }}
           </button>
         </div>
       </div>
